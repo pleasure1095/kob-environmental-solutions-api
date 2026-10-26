@@ -1,0 +1,30 @@
+Required/likely backend environment variables for Render:
+MONGODB_URI=mongodb+srv://<db-user>:<db-password>@<cluster-host>/<database>?retryWrites=true&w=majority
+APP_NAME=KOB Environmental Solutions
+APP_HOST_NAME=https://YOUR-FRONTEND.netlify.app
+JWT_KEY=<generate-a-long-random-secret>
+PORT=(set automatically by Render; do not hardcode)
+
+Feature-specific variables to configure when the matching feature is enabled:
+SMTP_HOST=
+SMTP_SERVICE=
+SMTP_PORT=
+SMTP_USERNAME=
+SMTP_PASSWORD=
+STRIPE_SECRET_KEY=
+TAP_SECRET_KEY=
+AUTHENTICATOR_SETUP_PAGE_URL=
+EMAIL_VERIFICATION_SUCCESS_PAGE_URL=
+INVALID_EMAIL_VERIFICATION_TOKEN_PAGE_URL=
+INVALID_PASSWORD_RESET_TOKEN_PAGE_URL=
+PASSWORD_RESET_PAGE_URL=
+
+Frontend Netlify environment variables:
+REACT_APP_SERVER_ENDPOINT=https://YOUR-BACKEND.onrender.com
+REACT_APP_APP_NAME=KOB Environmental Solutions
+REACT_APP_SHORT_NAME=KOB
+REACT_APP_SLOGAN=
+REACT_APP_EMAIL=
+REACT_APP_PHONE_NUMBER=
+
+SECURITY: Do NOT put OpenAI, Stripe, Tap, SMTP, or other private secret keys in REACT_APP_* variables. CRA embeds REACT_APP_* values in public browser files. The current frontend includes a browser-side OpenAI key usage and must not be given a private production key.

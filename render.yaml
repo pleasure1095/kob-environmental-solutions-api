@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: kob-environmental-solutions-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: DB_NAME
+        value: kobenv
+      - key: APP_NAME
+        value: KOB Environmental Solutions
+      - key: APP_HOST_NAME
+        sync: false
+      - key: JWT_KEY
+        generateValue: true
