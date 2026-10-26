@@ -1,0 +1,37 @@
+name: Extract Backend Source
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          mkdir -p extracted
+          unzip -q kob-environmental-solutions-api-source.zip -d extracted
+
+          if [ "$(find extracted -mindepth 1 -maxdepth 1 | wc -l)" -eq 1 ] && [ -d "$(find extracted -mindepth 1 -maxdepth 1 -type d | head -1)" ]; then
+            cp -a extracted/*/. .
+          else
+            cp -a extracted/. .
+          fi
+
+          rm -rf extracted
+          rm -f kob-environmental-solutions-api-source.zip
+
+      - name: Save extracted files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Extract backend source files" || echo "No changes to commit"
+          git push
